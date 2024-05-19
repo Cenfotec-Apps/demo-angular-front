@@ -1,0 +1,95 @@
+<div class="logo-wrapper">
+  <a routerLink="/">
+    <img
+      class="img-fluid"
+      src="../../../../../assets/icons/logo@2x.png"
+      width="50"
+      alt="Logo"
+    />
+  </a>
+
+  <div class="back-btn" (click)="layoutService.toggleSidebar()">
+    <i class="fa-solid fa-arrow-left"></i>
+  </div>
+
+  <div class="toggle-sidebar" (click)="layoutService.toggleSidebar()">
+    <i class="fa-solid fa fa-thumb-tack"></i>
+  </div>
+</div>
+
+<div class="logo-icon-wrapper">
+  <a href="javascript:void(0)">
+    <img
+      class="img-fluid"
+      src="../../../../../assets/icons/logo@2x.png"
+      width="35"
+      alt=""
+    />
+  </a>
+</div>
+
+<nav class="sidebar-main">
+  <div
+    id="left-arrow"
+    class="left-arrow"
+    [ngClass]="{ 'd-none': !showLeftArrow }"
+  >
+    <!-- <app-feather-icon icon="arrow-left"></app-feather-icon> -->
+  </div>
+
+  <div id="sidebar-menu" style="margin-left: 0px">
+    <ul class="sidebar-links custom-scrollbar">
+      <div class="simplebar-wrapper">
+        <div class="simplebar-mask">
+          <div class="simplebar-offset">
+            <div class="simplebar-content-wrapper">
+              <div class="simplebar-content">
+                <li class="back-btn">
+                  <a href="javascript:void(0)">
+                    <img
+                      class="img-fluid"
+                      src="../../../../../assets/img/login/login-bg.jpg"
+                      alt="Logo"
+                    />
+                  </a>
+
+                  <div
+                    class="mobile-back text-end"
+                    (click)="layoutService.toggleSidebar()"
+                  >
+                    <span>Atrás</span>
+                    <i class="fa fa-angle-right ps-2" aria-hidden="true"></i>
+                  </div>
+                </li>
+
+                <li class="sidebar-main-title">
+                  <div>
+                    <h6>General</h6>
+                  </div>
+                </li>
+
+                <li class="sidebar-list">
+                  <a
+                    routerLink="users"
+                    routerLinkActive="active"
+                    class="sidebar-link sidebar-title"
+                  >
+                    <span>Users</span>
+                  </a>
+                </li>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ul>
+  </div>
+
+  <div
+    class="right-arrow"
+    id="right-arrow"
+    [ngClass]="{ 'd-none': !showRigthArrow }"
+  >
+    <!-- <app-feather-icon icon="arrow-right"></app-feather-icon> -->
+  </div>
+</nav>

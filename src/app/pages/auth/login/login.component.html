@@ -1,0 +1,66 @@
+<div class="login-container">
+  <div class="d-flex align-items-center justify-content-center h-100">
+    <div class="login-card">
+      <div class="w-100">
+        <div class="text-center">
+          <a class="logo text-center" routerLink="/">
+            <img
+              width="250"
+              class="img-fluid mb-4"
+              src="../../../../assets/icons/logo@2x.png"
+              alt="Logo"
+            />
+          </a>
+        </div>
+        <div class="login-main">
+          <form (ngSubmit)="handleLogin($event)" autocomplete="off" #frm="ngForm">
+            <div class="mb-3">
+              <h4>Sign in to account</h4>
+              <small style="color: #4f4f4f">
+                Enter your email & password to login
+              </small>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="email" class="form-label mb-2">
+                Email Address
+              </label>
+              <input #email="ngModel" type="text" class="form-control" id="email" name="email"
+                placeholder="agent@gmail.com" [(ngModel)]="loginForm.email" [ngClass]="{
+                  'is-invalid': email.invalid && email.touched,
+                  'is-valid': email.valid && email.touched
+                }" required />
+              <div *ngIf="email.invalid" class="invalid-feedback">
+                Please add a valid email
+              </div>
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="password" class="form-label mb-2">Password</label>
+              <div class="form-input position-relative">
+                <input #password="ngModel" type="password" class="form-control" id="password" name="password"
+                placeholder="*****" [(ngModel)]="loginForm.password" [ngClass]="{
+                  'is-invalid': password.invalid && password.touched,
+                  'is-valid': password.valid && password.touched
+                }" required />
+                <div *ngIf="password.invalid" class="invalid-feedback">
+                  Please add a valid password
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mb-0">
+              <button class="btn btn-primary btn-block w-100" type="submit">
+                Sign in
+              </button>
+              @if(loginError) {
+                <p class="text-danger">{{loginError}}</p>
+              }
+            </div>
+            <a href="/signup">Go SignUp</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

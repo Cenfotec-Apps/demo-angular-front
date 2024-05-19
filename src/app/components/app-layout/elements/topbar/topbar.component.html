@@ -1,0 +1,25 @@
+<div class="page-header" [ngClass]="{ close_icon: !layoutService.sidebarOpen }">
+  <div class="header-wrapper row m-0">
+    <div class="header-logo-wrapper col-auto p-0">
+      <div class="logo-wrapper">
+        <a routerLink="/">
+          <img class="img-fluid" src="../../../../../assets/icons/logo@2x.png" alt="Logo" />
+        </a>
+      </div>
+
+      <div class="toggle-sidebar" (click)="layoutService.toggleSidebar()">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+
+    <div
+      class="nav-right col-xxl-7 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto"
+    >
+      <ul class="nav-menus mb-0">
+        <li class="profile-nav onhover-dropdown pe-0 py-0">
+          <app-my-account></app-my-account>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

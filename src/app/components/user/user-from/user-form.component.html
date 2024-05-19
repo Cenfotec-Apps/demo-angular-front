@@ -1,0 +1,107 @@
+<form (ngSubmit)="handleAction(frm)" autocomplete="off" #frm="ngForm" class="add-user-container">
+  <h3 class="mb-5 px-5">{{title}}</h3>
+  <div class="border-bottom pb-3 mb-3">
+    <div class="px-5">
+      <label for="email" class="form-label mb-2">
+        Email Address
+      </label>
+      <input #email="ngModel" type="text" class="form-control" id="email" name="email" 
+        placeholder="user@gmail.com"
+        [(ngModel)]="user.email" 
+        [ngClass]="{ 
+          'is-invalid': email.invalid && email.touched,
+          'is-valid': email.valid && email.touched
+        }" 
+        required 
+      />
+      @if (email.invalid) {
+        <div *ngIf="email.invalid" class="invalid-feedback">
+          Please add a valid email
+        </div>
+      }
+    </div>
+  </div>
+  <div class="border-bottom pb-3 mb-3 px-5">
+    <div class="row">
+      <div class="col-6">
+        <label for="name" class="form-label mb-2">
+          Name
+        </label>
+        <input #name="ngModel" type="text" class="form-control" id="name" name="name" 
+          placeholder="Carlos"
+          [(ngModel)]="user.name" 
+          [ngClass]="{ 
+            'is-invalid': name.invalid && name.touched,
+            'is-valid': name.valid && name.touched
+          }" 
+          required 
+        />
+        @if (name.invalid) {
+          <div *ngIf="name.invalid" class="invalid-feedback">
+            Please add a valid name
+          </div>
+        }
+      </div>
+      <div class="col-6">
+        <label for="lastname" class="form-label mb-2">
+          Lastname
+        </label>
+        <input #lastname="ngModel" type="text" class="form-control" id="lastname" 
+          name="lastname" 
+          placeholder="Hernández"
+          [(ngModel)]="user.lastname" 
+          [ngClass]="{ 
+            'is-invalid': lastname.invalid && lastname.touched,
+            'is-valid': lastname.valid && lastname.touched
+          }" 
+          required 
+        />
+        @if (lastname.invalid) {
+          <div *ngIf="lastname.invalid" class="invalid-feedback">
+            Please add a valid lastname
+          </div>
+        }
+      </div>
+      @if(action == 'add') {
+        <div class="col-6 pt-3">
+          <label for="password" class="form-label mb-2">
+            Password
+          </label>
+          <input #password="ngModel" type="password" class="form-control" id="password"    
+            name="password" 
+            placeholder="*****"
+            [(ngModel)]="user.password" 
+            [ngClass]="{ 
+              'is-invalid': password.invalid && password.touched,
+              'is-valid': password.valid && password.touched
+            }" 
+            required 
+          />
+          @if (password.invalid) {
+            <div *ngIf="password.invalid" class="invalid-feedback">
+              Please add a valid password
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+  <div class="pb-3 mb-3 d-flex justify-content-center align-items-center">
+    <button
+      type="submit"
+      class="btn btn-primary d-flex align-items-center">
+      <i class="fa-solid white me-2"
+        [ngClass]="{'fa-plus': action == 'add', 'fa-pencil':  action == 'edit'}"
+      ></i>
+      <p class="mb-0"> {{title}} </p>
+    </button>
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
+    @if(feedbackMessage.message) {
+      <p class="pb-0" [ngClass]="{
+        'text-danger': feedbackMessage.type == 'ERROR',
+        'text-success': feedbackMessage.type == 'SUCCESS'
+        }">{{feedbackMessage.message}}</p>
+    }
+  </div>
+</form>

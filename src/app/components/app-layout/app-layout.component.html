@@ -1,0 +1,50 @@
+<div class="ltr">
+  <div class="page-wrapper compact-wrapper">
+    <app-topbar></app-topbar>
+
+    <div class="page-body-wrapper">
+      <div
+        class="sidebar-wrapper"
+        sidebar-layout="default-sidebar"
+        icon="stroke-svg"
+        [ngClass]="{ close_icon: !layoutService.sidebarOpen }"
+      >
+        <app-sidebar></app-sidebar>
+      </div>
+
+      <div class="page-body">
+        <!-- <div class="container-fluid">
+          <div class="page-title">
+            <div class="row">
+              <div class="col-6">
+                <h3>{{ title }}</h3>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- <h3>{{ title }}</h3> -->
+
+        <main class="container-fluid">
+          <router-outlet></router-outlet>
+        </main>
+      </div>
+
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12 footer-copyright text-center">
+              <p class="mb-0">
+                Copyright 2024 &copy; gbs. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<!-- <div
+  class="bg-overlay"
+  [ngClass]="{ active: layoutService.sidebarOpen }"
+></div> -->
