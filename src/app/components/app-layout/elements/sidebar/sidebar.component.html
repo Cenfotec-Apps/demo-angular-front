@@ -68,15 +68,20 @@
                   </div>
                 </li>
 
-                <li class="sidebar-list">
-                  <a
-                    routerLink="users"
-                    routerLinkActive="active"
-                    class="sidebar-link sidebar-title"
-                  >
-                    <span>Users</span>
-                  </a>
-                </li>
+                @for (route of permittedRoutes; track $index) {
+                  <li class="sidebar-list">
+                    <a
+                      routerLink="{{route.path}}"
+                      routerLinkActive="active"
+                      class="sidebar-link sidebar-title"
+                    >
+                      @if (route.data) {
+                        <span>{{route.data['name']}}</span>
+                      }
+                    </a>
+                  </li>
+                }
+
               </div>
             </div>
           </div>

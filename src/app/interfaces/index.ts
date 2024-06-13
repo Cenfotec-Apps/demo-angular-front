@@ -16,6 +16,11 @@ export interface IUser {
   active?: boolean;
   createdAt?: string;
   updatedAt?: string;
+  authorities?: IAuthority[];
+}
+
+export interface IAuthority {
+  authority: string;
 }
 
 export interface IFeedBackMessage {
@@ -27,4 +32,10 @@ export enum IFeedbackStatus {
   success = "SUCCESS",
   error = "ERROR",
   default = ''
+}
+
+export enum IRole {
+  admin = "ROLE_ADMIN",
+  user = "ROLE_USER",
+  superAdmin = 'ROLE_SUPER_ADMIN'
 }

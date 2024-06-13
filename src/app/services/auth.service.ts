@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   private accessToken!: string;
   private expiresIn! : number;
-  private user: IUser = {email: ''};
+  private user: IUser = {email: '', authorities: []};
 
   constructor(private http: HttpClient) {
     this.load();
@@ -60,9 +60,30 @@ export class AuthService {
         this.accessToken = response.token;
         this.user.email = credentials.email;
         this.expiresIn = response.expiresIn;
+        this.user = response.authUser;
         this.save();
       })
     );
+  }
+
+  public hasRole(role: string): boolean {
+    return this.user.authorities ?  this.user?.authorities.some(authority => authority.authority == role) : false;
+  }
+
+  public hasAnyRole(roles: any[]): boolean {
+    return roles.some(role => this.hasRole(role));
+  }
+
+  public getPermittedRoutes(routes: any[]): any[] {
+    let permittedRoutes: any[] = [];
+    for (const route of routes) {
+      if(route.data && route.data.authorities) {
+        if (this.hasAnyRole(route.data.authorities)) {
+          permittedRoutes.unshift(route);
+        } 
+      }
+    }
+    return permittedRoutes;
   }
 
   public signup(user: IUser): Observable<ILoginResponse> {

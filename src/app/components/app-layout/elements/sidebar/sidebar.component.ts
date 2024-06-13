@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Route, RouterLink, RouterLinkActive } from '@angular/router';
 import { LayoutService } from '../../../../services/layout.service';
 import { AuthService } from '../../../../services/auth.service';
 import { SvgIconComponent } from '../../../svg-icon/svg-icon.component';
+import { routes } from '../../../../app.routes';
 
 @Component({
   selector: 'app-sidebar',
@@ -20,9 +21,15 @@ export class SidebarComponent {
   public width: any = window.innerWidth;
   public showLeftArrow: boolean = true;
   public showRigthArrow: boolean = false;
+  public layoutService = inject(LayoutService);
+  public authService = inject(AuthService);
+  permittedRoutes: Route[] = [];
+  appRoutes: any;
 
   constructor(
-    public layoutService: LayoutService,
-    public authService: AuthService
-  ) {}
+  ) {
+    this.appRoutes = routes.filter(route => route.path == 'app')[0];
+    this.permittedRoutes = this.authService.getPermittedRoutes(this.appRoutes.children);
+    console.log('this.permittedRoutes', this.permittedRoutes);
+  }
 }
