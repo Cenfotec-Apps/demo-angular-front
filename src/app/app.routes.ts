@@ -55,14 +55,15 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
-        data: { authorities: [
+        data: { 
+          authorities: [
             IRole.admin, 
             IRole.superAdmin,
             IRole.user
           ],
           name: 'Dashboard'
         }
-      },
+      }
     ],
   },
 ];

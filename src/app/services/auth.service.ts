@@ -16,7 +16,6 @@ export class AuthService {
   }
 
   public save(): void {
-    console.log('save credential');
     if (this.user) localStorage.setItem('auth_user', JSON.stringify(this.user));
 
     if (this.accessToken)
