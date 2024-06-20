@@ -17,9 +17,8 @@ export class ProfileService extends BaseService<IUser> {
 
   getUserInfoSignal() {
     this.findAll().subscribe({
-      next: (response: any) =>{
-        console.log('response', response);
-        this.userSignal.set();
+      next: (response: any) => {
+        this.userSignal.set(response);
       },
       error: (error: any) => {
         this.snackBar.open(
@@ -33,7 +32,6 @@ export class ProfileService extends BaseService<IUser> {
         )
       }
     })
-    console.log('after  getUserInfoSignal');
   }
 
 }

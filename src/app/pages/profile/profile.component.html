@@ -1,3 +1,70 @@
-<p>profile works!</p>
-
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores expedita quae eum natus molestiae magnam, esse, minima libero maiores quos repellat est dolore sit corporis quia, fuga illum omnis enim.</p>
+<div class="d-flex justify-content-center align-items-center profile-main-container">
+  <div class="my-info-container">
+    <div class="border-bottom py-3">
+      <i class="fa-solid fa-user-pen"></i>
+      <p class="mb-2 title">My Information</p>
+    </div>
+    <div class="d-flex border-bottom py-3 info-text">
+      <p class="me-3">Name:</p>
+      <p >{{this.profileService.user$().name}}</p>
+    </div>
+    <div class="d-flex border-bottom py-3 info-text">
+      <p class="me-3">Lastname:</p>
+      <p>{{this.profileService.user$().lastname}}</p>
+    </div>
+    <div class="d-flex border-bottom py-3 info-text">
+      <p class="me-3">Email:</p>
+      <p>{{this.profileService.user$().email}}</p>
+    </div>
+  </div>
+  <div>
+    <div class="rol-info-container">
+      <div class="border-bottom py-3">
+        <p class="mb-2 title">Rol info</p>
+      </div>
+      <div class="d-flex border-bottom py-3 info-text">
+        <p class="me-3">Name:</p>
+        <p >{{this.profileService.user$().role?.name}}</p>
+      </div>
+      <div class="d-flex border-bottom py-3 info-text">
+        <p class="me-3">Description:</p>
+        <p>{{this.profileService.user$().role?.description}}</p>
+      </div>
+      <div class="d-flex border-bottom py-3 info-text">
+        <p class="me-3">Id:</p>
+        <p>{{this.profileService.user$().role?.id}}</p>
+      </div>
+    </div>
+    <div class="not-info-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td> mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td> fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td> twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
