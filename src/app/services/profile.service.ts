@@ -19,15 +19,16 @@ export class ProfileService extends BaseService<IUser> {
     this.findAll().subscribe({
       next: (response: any) =>{
         console.log('response', response);
+        this.userSignal.set();
       },
       error: (error: any) => {
         this.snackBar.open(
           `Error getting user profile info ${error.message}`,
            'Close', 
           {
-          horizontalPosition: 'right', 
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
+            horizontalPosition: 'right', 
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
           }
         )
       }
