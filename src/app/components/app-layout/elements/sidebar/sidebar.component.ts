@@ -23,13 +23,12 @@ export class SidebarComponent {
   public showRigthArrow: boolean = false;
   public layoutService = inject(LayoutService);
   public authService = inject(AuthService);
-  permittedRoutes: Route[] = [];
+  public permittedRoutes: Route[] = [];
   appRoutes: any;
 
   constructor(
   ) {
     this.appRoutes = routes.filter(route => route.path == 'app')[0];
     this.permittedRoutes = this.authService.getPermittedRoutes(this.appRoutes.children);
-    console.log('this.permittedRoutes', this.permittedRoutes);
   }
 }

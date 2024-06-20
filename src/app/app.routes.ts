@@ -9,6 +9,7 @@ import { AdminRoleGuard } from './guards/admin-role.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GuestGuard } from './guards/guest.guard';
 import { IRole } from './interfaces';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -49,7 +50,8 @@ export const routes: Routes = [
             IRole.admin, 
             IRole.superAdmin
           ],
-          name: 'Users'
+          name: 'Users',
+          showInSidebar: true
         }
       },
       {
@@ -61,7 +63,21 @@ export const routes: Routes = [
             IRole.superAdmin,
             IRole.user
           ],
-          name: 'Dashboard'
+          name: 'Dashboard',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        data: { 
+          authorities: [
+            IRole.admin, 
+            IRole.superAdmin,
+            IRole.user
+          ],
+          name: 'profile',
+          showInSidebar: false
         }
       }
     ],

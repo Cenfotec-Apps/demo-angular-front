@@ -69,17 +69,17 @@
                 </li>
 
                 @for (route of permittedRoutes; track $index) {
+                  @if (route.data && route.data['showInSidebar']) {
                   <li class="sidebar-list">
                     <a
                       routerLink="{{route.path}}"
                       routerLinkActive="active"
                       class="sidebar-link sidebar-title"
                     >
-                      @if (route.data) {
                         <span>{{route.data['name']}}</span>
-                      }
-                    </a>
-                  </li>
+                      </a>
+                    </li>
+                  }
                 }
 
               </div>
