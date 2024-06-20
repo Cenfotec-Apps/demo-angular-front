@@ -17,6 +17,7 @@ export interface IUser {
   createdAt?: string;
   updatedAt?: string;
   authorities?: IAuthority[];
+  role?: IRole
 }
 
 export interface IAuthority {
@@ -38,4 +39,12 @@ export enum IRoleType {
   admin = "ROLE_ADMIN",
   user = "ROLE_USER",
   superAdmin = 'ROLE_SUPER_ADMIN'
+}
+
+export interface IRole {
+  createdAt: string,
+  description: string,
+  id: number
+  name : string,
+  updatedAt: string
 }
