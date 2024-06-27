@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <div>
+    <h2>Games</h2>
+  </div>
+  <div>
+    @defer {
+      <div>
+        <app-games-list
+        [itemList]="gameService.items$()"
+        />
+      </div>
+    } @loading (after 100ms; minimum 1s) {
+      <app-loader/>
+    }
+  </div>
+</div>

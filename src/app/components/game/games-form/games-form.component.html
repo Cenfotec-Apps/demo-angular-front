@@ -1,0 +1,50 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <p>Update Game</p>
+    </div>
+    <div class="col-6">
+      <input #name="ngModel" type="text" class="form-control" id="name" name="name" 
+        placeholder="Game name"
+        [(ngModel)]="toUpdateGame.name" 
+        [ngClass]="{ 
+          'is-invalid': name.invalid && name.touched,
+          'is-valid': name.valid && name.touched
+        }" 
+        required 
+      />
+    </div>
+    <div class="col-6">
+      <input #description="ngModel" type="text" class="form-control" id="description" name="description" 
+        placeholder="Game description"
+        [(ngModel)]="toUpdateGame.description" 
+        [ngClass]="{ 
+          'is-invalid': description.invalid && description.touched,
+          'is-valid': description.valid && description.touched
+        }" 
+        required 
+      />
+    </div>
+    <div class="col-6 mt-3">
+      <input #imgURL="ngModel" type="text" class="form-control" id="imgURL" name="imgURL" 
+        placeholder="Game image url"
+        [(ngModel)]="toUpdateGame.imgURL" 
+        [ngClass]="{ 
+          'is-invalid': imgURL.invalid && imgURL.touched,
+          'is-valid': imgURL.valid && imgURL.touched
+        }" 
+        required 
+      />
+    </div>
+    <div class="col-6 mt-3">
+      <button
+        type="button"
+        class="btn btn-primary d-flex align-items-center">
+        <i class="fa-solid fa-pencil white me-2"></i>
+        <p class="mb-0"> Update Game </p>
+      </button>
+    </div>
+  </div>
+</div>
+

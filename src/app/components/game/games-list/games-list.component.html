@@ -1,0 +1,46 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Updated At</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of itemList; track $index) {
+        <tr>
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.name}}</td>
+          <td>{{item.description}}</td>
+          <td>{{item.createdAt | date}}</td>
+          <td>{{item.updatedAt | date}}</td>
+          <td>
+            <p 
+              class="text-white text-center"
+              [ngClass]="{
+              'bg-info': item.status == 'active',
+              'bg-warning': item.status == 'disabled'
+              }">{{item.status}}</p>
+          </td>
+          <td>
+            <button type="button" (click)="showDetailModal(item, detailModal)"  class="btn btn-secondary">
+              <i class="fa-solid fa-eye white"
+              ></i>
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<app-modal #detailModal>
+  <app-games-form
+  [toUpdateGame]="selectedItem"
+  />
+</app-modal>
