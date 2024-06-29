@@ -49,7 +49,7 @@ export class UserService extends BaseService<IUser> {
   deleteUserSignal (user: IUser): Observable<any>{
     return this.del(user.id).pipe(
       tap((response: any) => {
-        const updatedUsers = this.userListSignal().filter(u => u.id !== user.id);
+        const updatedUsers = this.userListSignal().filter( (u:IUser) => u.id !== user.id);
         this.userListSignal.set(updatedUsers);
       }),
       catchError(error => {

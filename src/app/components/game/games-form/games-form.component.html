@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <p>Update Game</p>
+      <p>{{title}}</p>
     </div>
     <div class="col-6">
       <input #name="ngModel" type="text" class="form-control" id="name" name="name" 
@@ -40,9 +40,10 @@
     <div class="col-6 mt-3">
       <button
         type="button"
+        (click)="addEdit()"
         class="btn btn-primary d-flex align-items-center">
         <i class="fa-solid fa-pencil white me-2"></i>
-        <p class="mb-0"> Update Game </p>
+        <p class="mb-0"> {{title}} </p>
       </button>
     </div>
   </div>

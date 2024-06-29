@@ -4,6 +4,12 @@
   </div>
   <div>
     @defer {
+      <div class="d-flex justify-content-end pb-2">
+        <button type="button" class="btn btn-primary d-flex align-items-center" (click)="formModal.show()">
+          <i class="fa-solid fa-plus white"></i>
+          <p class="mb-0">Add game</p>
+        </button>
+      </div>
       <div>
         <app-games-list
         [itemList]="gameService.items$()"
@@ -14,3 +20,11 @@
     }
   </div>
 </div>
+
+
+<app-modal size="lg" #formModal>
+  <app-games-form 
+  (callParentEvent)="onFormEventCalled($event)"
+  [title]="'Add Game'"
+  ></app-games-form>
+</app-modal>

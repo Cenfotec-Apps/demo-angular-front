@@ -32,6 +32,10 @@
               <i class="fa-solid fa-eye white"
               ></i>
             </button>
+            <button type="button" (click)="deleteGame(item)" class="btn btn-danger">
+              <i class="fa-solid fa-trash white"
+              ></i>
+            </button>
           </td>
         </tr>
       }
@@ -41,6 +45,8 @@
 
 <app-modal #detailModal>
   <app-games-form
+  (callParentEvent)="onFormEventCalled($event)"
+  [title]="'Update Game'"
   [toUpdateGame]="selectedItem"
   />
 </app-modal>

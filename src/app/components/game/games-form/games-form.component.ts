@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IGame } from '../../../interfaces';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -14,5 +14,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './games-form.component.scss'
 })
 export class GamesFormComponent {
-  @Input() toUpdateGame: IGame = {}
+  @Input() title: string = '';
+  @Input() toUpdateGame: IGame = {};
+  @Output() callParentEvent: EventEmitter<IGame> = new EventEmitter<IGame>();
+
+  addEdit()  {
+    this.callParentEvent.emit(this.toUpdateGame);
+  }
+
 }
