@@ -1,6 +1,6 @@
 import { GameService } from './../../../services/game.service';
-import { Component, Input, inject } from '@angular/core';
-import { IGame } from '../../../interfaces';
+import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
+import { IAuthority, IGame } from '../../../interfaces';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../modal/modal.component';
 import { GamesFormComponent } from '../games-form/games-form.component';
@@ -17,11 +17,18 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './games-list.component.html',
   styleUrl: './games-list.component.scss'
 })
-export class GamesListComponent {
+export class GamesListComponent implements OnChanges{
   @Input() itemList: IGame[] = [];
+  @Input() areActionsAvailable: boolean = false;
   public selectedItem: IGame = {};
   private gameService = inject(GameService);
   public modalService = inject(NgbModal);
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['areActionsAvailable']) {
+      console.log('areActionsAvailable', this.areActionsAvailable);
+    }
+  }
 
   showDetailModal(item: IGame, modal:any) {
     this.selectedItem = {...item};

@@ -13,6 +13,7 @@
       <div>
         <app-games-list
         [itemList]="gameService.items$()"
+        [areActionsAvailable]="areActionsAvailable"
         />
       </div>
     } @loading (after 100ms; minimum 1s) {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ILoginResponse, IResponse, IUser } from '../interfaces';
+import { IAuthority, ILoginResponse, IResponse, IUser } from '../interfaces';
 import { Observable, firstValueFrom, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -94,5 +94,18 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('expiresIn');
     localStorage.removeItem('auth_user');
+  }
+
+  public getUserAuthorities (): IAuthority[] | undefined {
+    return this.getUser()?.authorities ? this.getUser()?.authorities : [];
+  }
+
+  public areActionsAvailable (routeAuthorities: string[]): boolean {
+    let userAuthorities = this.getUserAuthorities() ? this.getUserAuthorities() : [];
+    let allowedUser: boolean | undefined = false;
+    routeAuthorities.forEach( (authority: string) => {
+      allowedUser = userAuthorities?.some(item => item.authority == authority);
+    })
+    return allowedUser;
   }
 }
