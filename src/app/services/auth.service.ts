@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IAuthority, ILoginResponse, IResponse, IUser } from '../interfaces';
+import { IAuthority, ILoginResponse, IResponse, IRoleType, IUser } from '../interfaces';
 import { Observable, firstValueFrom, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -100,12 +100,23 @@ export class AuthService {
     return this.getUser()?.authorities ? this.getUser()?.authorities : [];
   }
 
-  public areActionsAvailable (routeAuthorities: string[]): boolean {
-    let userAuthorities = this.getUserAuthorities() ? this.getUserAuthorities() : [];
-    let allowedUser: boolean | undefined = false;
-    routeAuthorities.forEach( (authority: string) => {
-      allowedUser = userAuthorities?.some(item => item.authority == authority);
-    })
-    return allowedUser;
+  public areActionsAvailable(routeAuthorities: string[]): boolean  {
+    // definición de las variables de validación
+    let allowedUser: boolean = false;
+    let isAdmin: boolean = false;
+    // se obtienen los permisos del usuario
+    let userAuthorities = this.getUserAuthorities();
+    // se valida que sea una ruta permitida para el usuario
+    for (const authority of routeAuthorities) {
+      if (userAuthorities?.some(item => item.authority == authority) ) {
+        allowedUser = userAuthorities?.some(item => item.authority == authority)
+      }
+      if (allowedUser) break;
+    }
+    // se valida que el usuario tenga un rol de administración
+    if (userAuthorities?.some(item => item.authority == IRoleType.admin || item.authority == IRoleType.superAdmin)) {
+      isAdmin = userAuthorities?.some(item => item.authority == IRoleType.admin || item.authority == IRoleType.superAdmin);
+    }          
+    return allowedUser && isAdmin;
   }
 }

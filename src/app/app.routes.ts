@@ -88,6 +88,7 @@ export const routes: Routes = [
           authorities: [
             IRoleType.admin, 
             IRoleType.superAdmin,
+            IRoleType.user,
           ],
           name: 'games',
           showInSidebar: true
