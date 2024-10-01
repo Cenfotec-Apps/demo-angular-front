@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../modal/modal.component';
 import { GamesFormComponent } from '../games-form/games-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 
 @Component({
   selector: 'app-games-list',
@@ -12,7 +13,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     ModalComponent,
-    GamesFormComponent
+    GamesFormComponent,
+    PickerComponent
   ],
   templateUrl: './games-list.component.html',
   styleUrl: './games-list.component.scss'

@@ -63,3 +63,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link {
   text-decoration: none;
 }
+
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links {
+  height: calc(93vh - 115px) !important;
+  left: -300px;
+  z-index: 99;
+  transition: color 1s ease;
+  /* overflow: auto; */
+  /* color: rgba(0, 0, 0, 0); */
+  margin-top: 20px;
+  margin-bottom: 30px;
+}

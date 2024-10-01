@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "@ctrl/ngx-emoji-mart": "^9.2.0",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
