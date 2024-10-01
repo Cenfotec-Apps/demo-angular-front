@@ -1,1 +1,22 @@
-<router-outlet />
+<!-- <router-outlet /> -->
+ <div class="container">
+  <div class="row">
+    <div class="col-12 bg-secondary my-3">
+      <h1 class="text-white mb-0 py-3"> {{ title }} </h1>
+    </div>
+    <div class="col-12">
+      <p class="fs-2">{{ cant }}</p>
+    </div>
+    <div class="col-12">
+      <p class="fs-2">{{ date | date: 'short' }}</p>
+    </div>
+    <div class="col-12">
+      @for (item of operators; track $index) {
+        <p class="fs-3">name: {{item.name}} symbol: {{item.symbol}}</p>
+        @if (item.name) {
+          <button (click)="operation(item.name)" class="btn btn-secondary" type="button">{{item.symbol}}</button>
+        }
+      }
+    </div>
+  </div>
+ </div>
