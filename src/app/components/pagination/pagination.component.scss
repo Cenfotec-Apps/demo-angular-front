@@ -1,0 +1,14 @@
+button:disabled {
+  cursor: pointer;
+  background: #e6e6e6;
+  color: #a39c9c !important;
+}
+
+.pagination .page-item .page-link{
+  color: var(--general-btn-font-color);
+  font-family: var(--general-btn-font-family);
+}
+
+.pagination .page-item button:enabled{
+  background-color: var(--active-link-color);
+}

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IResponse } from '../interfaces';
 import { Injectable, inject } from '@angular/core';
@@ -14,8 +14,16 @@ export class BaseService<T> {
     return this.http.get<IResponse<T>>(this.source + '/' + id);
   }
 
-  public findAll(s: string = ''): Observable<IResponse<T[]>> {
-    return this.http.get<IResponse<T[]>>(this.source, { params: { s } });
+  public findAll(): Observable<IResponse<T[]>> {
+    return this.http.get<IResponse<T[]>>(this.source);
+  }
+
+  public findAllWithParams(params: any = {}): Observable<IResponse<T[]>> {
+    let queryParams = new HttpParams();
+    Object.keys(params).forEach(key => {
+      queryParams = queryParams.append(key, params[key]);
+    })
+    return this.http.get<IResponse<T[]>>(this.source, {params: queryParams});
   }
 
   public add(data: {}): Observable<IResponse<T>> {

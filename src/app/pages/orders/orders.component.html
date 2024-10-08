@@ -1,0 +1,8 @@
+<app-orders-list
+  [title]="'Orders list'"
+  [orders]="ordersService.orders$()"
+/>
+<app-pagination
+  [service]="ordersService"
+  
+/>

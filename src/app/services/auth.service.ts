@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { IAuthority, ILoginResponse, IResponse, IRoleType, IUser } from '../interfaces';
 import { Observable, firstValueFrom, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -10,8 +10,9 @@ export class AuthService {
   private accessToken!: string;
   private expiresIn! : number;
   private user: IUser = {email: '', authorities: []};
+  private http: HttpClient = inject(HttpClient);
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.load();
   }
 
