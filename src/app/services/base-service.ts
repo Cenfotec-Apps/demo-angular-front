@@ -19,22 +19,38 @@ export class BaseService<T> {
   }
 
   public findAllWithParams(params: any = {}): Observable<IResponse<T[]>> {
-    let queryParams = new HttpParams();
-    Object.keys(params).forEach(key => {
-      queryParams = queryParams.append(key, params[key]);
-    })
-    return this.http.get<IResponse<T[]>>(this.source, {params: queryParams});
+    return this.http.get<IResponse<T[]>>(this.source, {params: this.buildUrlParams(params)});
+  }
+
+  public findAllWithParamsAndCustomSource(customUrlSource: string, params: any = {}): Observable<IResponse<T[]>> {
+    return this.http.get<IResponse<T[]>>(`${this.source}/${customUrlSource}`, {params: this.buildUrlParams(params)});
   }
 
   public add(data: {}): Observable<IResponse<T>> {
     return this.http.post<IResponse<T>>(this.source, data);
   }
 
+  public addWithParams(params: any = {}, data: {}): Observable<IResponse<T>> {
+    return this.http.post<IResponse<T>>(this.source, data, {params: this.buildUrlParams(params)});
+  }
+
+  public addCustomSource(customUrlSource: string, data: {}): Observable<IResponse<T>> {
+    return this.http.post<IResponse<T>>(`${this.source}/${customUrlSource}`, data);
+  }
+
   public edit(id: number | undefined, data: {}): Observable<IResponse<T>> {
     return this.http.put<IResponse<T>>(this.source + '/' + id, data);
   }
-
+  
   public del(id: any): Observable<IResponse<T>> {
     return this.http.delete<IResponse<T>>(this.source + '/' + id);
+  }
+
+  public buildUrlParams (params: any = {}) {
+    let queryParams = new HttpParams();
+    Object.keys(params).forEach(key => {
+      queryParams = queryParams.append(key, params[key]);
+    })
+    return queryParams;
   }
 }

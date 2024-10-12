@@ -1,0 +1,28 @@
+@if (!isLoading) {
+  <div [class]="modalContentClass" [ngClass]="{'custom-bg': useCustomBackGround}" >
+    <div class="modal-header" [hidden]="hideCancelOption">
+      <button type="button" (click)="hideModal()" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div [class]="modalBodyClass">
+      <ng-content></ng-content>
+    </div>
+    @if (!hideFooter) {
+      <div [class]="modalFooterClass">
+        <button type="button" [disabled]="loadingConfirmationMethod === true" (click)="callCancelMethod.emit()" class="btn btn-danger" data-dismiss="modal">{{cancelAction}}</button>
+        @if (!hideConfirmAction) {
+          <button type="button" [disabled]="customValidation || loadingConfirmationMethod === true" (click)="callConfirmationMethod.emit()" class="btn btn-primary">
+            @if (loadingConfirmationMethod === true) {
+              <app-loader/>
+            } @else {
+              {{confirmAction}}
+            }
+          </button>
+        }
+      </div>
+    }
+  </div>
+} @else {
+  <app-loader size="full" [contrast]="true"/>
+}

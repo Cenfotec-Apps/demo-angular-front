@@ -1,39 +1,45 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, inject, Input, ViewChild, OnInit, Output, EventEmitter, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { LoaderComponent } from '../loader/loader.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [],
-  template: `
-    <ng-template #modal>
-      <div class="d-flex align-item-center justify-content-end p-2">
-        <button type="button" (click)="hide()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body px-0">
-        <ng-content></ng-content>
-      </div>
-    </ng-template>
-  `,
+  imports: [
+    LoaderComponent,
+    CommonModule
+  ],
+  templateUrl: './modal.component.html',
+  styleUrl: './modal.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ModalComponent {
-  @Input() size?: string;
+export class ModalComponent{
   @Input() title?: string;
-  @ViewChild('modal') modal: any;
-  private modalRef?: NgbModalRef;
+  @Input() confirmAction: string = '';
+  @Input() cancelAction: string = '';
+  @Input() customValidation: boolean = false;
+  @Input() isLoading: boolean = false;
+  @Input() loadingConfirmationMethod: boolean = false;
+  @Input() hideConfirmAction: boolean = false;
+  @Input() useCustomBackGround: boolean = false;
+  @Input() hideCancelOption: boolean = false;
+  @Input() hideFooter: boolean = false;
+  @Input() modalBodyClass: string = "modal-body";
+  @Input() modalFooterClass: string = "modal-footer";
+  @Input() modalContentClass: string = "modal-content";
+  @Output() callCancelMethod = new EventEmitter();
+  @Output() callConfirmationMethod = new EventEmitter();
 
-  constructor(private modalService: NgbModal) {}
-
-  public show() {
-    this.modalRef = this.modalService.open(this.modal, {
-      ariaLabelledBy: 'modal-component',
-      centered: true,
-      size: this.size ?? 'md',
-    });
-  }
+  public modalService: NgbModal = inject(NgbModal)
 
   public hide() {
-    this.modalRef?.dismiss();
+   this.modalService.dismissAll();
+  }
+
+  public hideModal() {
+    this.hide();
+    this.callCancelMethod.emit();
   }
 
 }

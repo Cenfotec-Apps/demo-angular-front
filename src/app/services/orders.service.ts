@@ -1,6 +1,8 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { BaseService } from './base-service';
 import { IOrder, ISearch } from '../interfaces';
+import { AuthService } from './auth.service';
+import { AlertService } from './alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,8 @@ export class OrdersService extends BaseService<IOrder> {
     size: 5
   }
   public totalItems: any = [];
+  private authService: AuthService = inject(AuthService);
+  private alertService: AlertService = inject(AlertService);
 
   getAll() {
     this.findAllWithParams(this.search).subscribe({
@@ -25,6 +29,32 @@ export class OrdersService extends BaseService<IOrder> {
         this.orderListSignal.set(response.data);
       },
       error: (err: any) => {
+        console.error('error', err);
+      }
+    });
+  }
+
+  getAllByUser() {
+    this.findAllWithParamsAndCustomSource(`user/${this.authService.getUser()?.id}/orders`, this.search).subscribe({
+      next: (response: any) => {
+        this.search = {...this.search, ...response.meta};
+        this.totalItems = Array.from({length: this.search.totalPages ? this.search.totalPages: 0}, (_, i) => i+1);
+        this.orderListSignal.set(response.data);
+      },
+      error: (err: any) => {
+        console.error('error', err);
+      }
+    });
+  }
+
+  save(order: IOrder) {
+    this.addCustomSource(`user/${this.authService.getUser()?.id}`, order).subscribe({
+      next: () => {
+        this.alertService.displayAlert('success', 'order added', 'center', 'top', ['success-snackbar']);
+        this.getAllByUser();
+      },
+      error: (err: any) => {
+        this.alertService.displayAlert('error', 'An error occurred adding the order','center', 'top', ['error-snackbar']);
         console.error('error', err);
       }
     });
