@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IOrder } from '../../../interfaces';
 
@@ -15,17 +15,22 @@ import { IOrder } from '../../../interfaces';
 })
 export class OrdersFormComponent {
   public fb: FormBuilder = inject(FormBuilder);
-  public ordersForm: FormGroup = this.fb.group({
-    description: ['', Validators.required],
-    total: ['', Validators.required],
-  })
+  @Input() orderForm!: FormGroup;
   @Output() callSaveMethod: EventEmitter<IOrder> = new EventEmitter<IOrder>();
+  @Output() callUpdateMethod: EventEmitter<IOrder> = new EventEmitter<IOrder>();
 
   callSave() {
-    let order = {
-      description: this.ordersForm.controls['description'].value,
-      total: this.ordersForm.controls['total'].value
+    let order: IOrder = {
+      description: this.orderForm.controls['description'].value,
+      total: this.orderForm.controls['total'].value
     }
-    this.callSaveMethod.emit(order);
+    if(this.orderForm.controls['id'].value) {
+      order.id = this.orderForm.controls['id'].value;
+    } 
+    if(order.id) {
+      this.callUpdateMethod.emit(order);
+    } else {
+      this.callSaveMethod.emit(order);
+    }
   }
 }

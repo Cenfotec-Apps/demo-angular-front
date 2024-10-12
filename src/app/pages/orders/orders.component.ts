@@ -7,6 +7,7 @@ import { LoaderComponent } from '../../components/loader/loader.component';
 import { ModalService } from '../../services/modal.service';
 import { OrdersFormComponent } from '../../components/orders/orders-form/orders-form.component';
 import { IOrder } from '../../interfaces';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-orders',
@@ -25,6 +26,12 @@ export class OrdersComponent {
   public ordersService: OrdersService = inject(OrdersService);
   public modalService: ModalService = inject(ModalService);
   @ViewChild('addOrdersModal') public addOrdersModal: any;
+  public fb: FormBuilder = inject(FormBuilder);
+  orderForm = this.fb.group({
+    id: [''],
+    description: ['', Validators.required],
+    total: ['', Validators.required],
+  })
 
   constructor() {
     this.ordersService.getAllByUser();
@@ -32,6 +39,18 @@ export class OrdersComponent {
 
   saveOrder(order: IOrder) {
     this.ordersService.save(order);
+    this.modalService.closeAll();
+  }
+
+  callEdition(order: IOrder) {
+    this.orderForm.controls['id'].setValue(order.id ? JSON.stringify(order.id) : '');
+    this.orderForm.controls['description'].setValue(order.description ? order.description : '');
+    this.orderForm.controls['total'].setValue(order.total ? JSON.stringify(order.total) : '');
+    this.modalService.displayModal('md', this.addOrdersModal);
+  }
+  
+  updateOrder(order: IOrder) {
+    this.ordersService.update(order);
     this.modalService.closeAll();
   }
 

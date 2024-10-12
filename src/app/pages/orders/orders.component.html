@@ -9,6 +9,8 @@
     </div>
     <div class="col-12">
       <app-orders-list
+        (callModalAction)="callEdition($event)"
+        (callDeleteAction)="ordersService.delete($event)"
         [orders]="ordersService.orders$()"
       />
     </div>
@@ -28,7 +30,9 @@
   >
     <div>
       <app-orders-form
+        [orderForm]="orderForm"
         (callSaveMethod)="saveOrder($event)"
+        (callUpdateMethod)="updateOrder($event)"
       />
     </div>
   </app-modal>

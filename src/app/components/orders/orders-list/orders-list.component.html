@@ -17,8 +17,8 @@
         <td>{{item.description}}</td>
         <td>{{item.total}}</td>
         <td>
-          <button class="btn btn-warning me-2" type="button"><i class="fas fa-pen"></i></button>
-          <button class="btn btn-danger" type="button"><i class="fas fa-trash"></i></button>
+          <button (click)="callModalAction.emit(item);" class="btn btn-warning me-2" type="button"><i class="fas fa-pen"></i></button>
+          <button (click)="callDeleteAction.emit(item)" class="btn btn-danger" type="button"><i class="fas fa-trash"></i></button>
         </td>
       </tr>
     }

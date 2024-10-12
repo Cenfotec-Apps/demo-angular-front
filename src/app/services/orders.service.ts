@@ -49,12 +49,38 @@ export class OrdersService extends BaseService<IOrder> {
 
   save(order: IOrder) {
     this.addCustomSource(`user/${this.authService.getUser()?.id}`, order).subscribe({
-      next: () => {
-        this.alertService.displayAlert('success', 'order added', 'center', 'top', ['success-snackbar']);
+      next: (response: any) => {
+        this.alertService.displayAlert('success', response.message, 'center', 'top', ['success-snackbar']);
         this.getAllByUser();
       },
       error: (err: any) => {
         this.alertService.displayAlert('error', 'An error occurred adding the order','center', 'top', ['error-snackbar']);
+        console.error('error', err);
+      }
+    });
+  }
+
+  update(order: IOrder) {
+    this.editCustomSource(`${order.id}`, order).subscribe({
+      next: (response: any) => {
+        this.alertService.displayAlert('success', response.message, 'center', 'top', ['success-snackbar']);
+        this.getAllByUser();
+      },
+      error: (err: any) => {
+        this.alertService.displayAlert('error', 'An error occurred updating the order','center', 'top', ['error-snackbar']);
+        console.error('error', err);
+      }
+    });
+  }
+
+  delete(order: IOrder) {
+    this.delCustomSource(`${order.id}`).subscribe({
+      next: (response: any) => {
+        this.alertService.displayAlert('success', response.message, 'center', 'top', ['success-snackbar']);
+        this.getAllByUser();
+      },
+      error: (err: any) => {
+        this.alertService.displayAlert('error', 'An error occurred deleting the order','center', 'top', ['error-snackbar']);
         console.error('error', err);
       }
     });
