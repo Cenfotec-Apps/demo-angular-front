@@ -14,13 +14,15 @@
         [orders]="ordersService.orders$()"
       />
     </div>
-    <app-pagination
-      [service]="ordersService"
-      [customCall]="true"
-      (callCustomPaginationMethod)="ordersService.getAllByUser()"
-    />
+    @if(ordersService.orders$().length) {
+      <app-pagination
+        [service]="ordersService"
+        [customCall]="true"
+        (callCustomPaginationMethod)="authService.isSuperAdmin() ? ordersService.getAll(): ordersService.getAllByUser()"
+      />
+    }
   </div>
-} @loading (minimum 1s) {
+} @loading (minimum 1.5s) {
   <app-loader/>
 }
 

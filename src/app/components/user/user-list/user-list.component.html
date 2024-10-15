@@ -12,37 +12,28 @@
       </tr>
     </thead>
     <tbody>
-      @for (item of userList; track item.id) {
-      <tr>
-        <th scope="row">{{item.id}}</th>
-        <td>{{item.name}}</td>
-        <td>{{item.lastname}}</td>
-        <td>{{item.email}}</td>
-        <td>{{item.createdAt | date: 'dd/MM/yyyy HH:mm'}}</td>
-        <td>{{item.updatedAt | date: 'dd/MM/yyyy HH:mm'}}</td>
-        <td>
-          <div class="d-flex justify-content-evenly align-items-center">
-            <button type="button" (click)="showDetail(item, formModal)" class="btn btn-secondary">
-              <i class="fa-solid fa-eye white"
-              ></i>
-            </button>
-            <button type="button" (click)="deleteUser(item)" class="btn btn-danger">
-              <i class="fa-solid fa-trash white"
-              ></i>
-            </button>
-          </div>
-        </td>
-      </tr>
+      @for (item of users; track item.id) {
+        <tr>
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.name}}</td>
+          <td>{{item.lastname}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.createdAt | date: 'dd/MM/yyyy HH:mm'}}</td>
+          <td>{{item.updatedAt | date: 'dd/MM/yyyy HH:mm'}}</td>
+          <td>
+            <button (click)="callModalAction.emit(item);" class="btn btn-warning me-2" type="button"><i class="fas fa-pen"></i></button>
+            <button (click)="callDeleteAction.emit(item)" class="btn btn-danger" type="button"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="7">
+            <div class="d-flex justify-content-center align-items-center w-100">
+              <p class="mb-0">There are not users</p>
+            </div>
+          </td>
+        </tr>
       }
     </tbody>
   </table>
 </div>
-
-<app-modal size="lg" #formModal>
-  <app-user-form 
-  [user]="currentUser" 
-  [action]="'edit'"
-  [title]="'Update User'"
-  >
-</app-user-form>
-</app-modal>

@@ -1,48 +1,39 @@
-import { Component, Input, inject } from '@angular/core';
-import { IFeedBackMessage, IUser, IFeedbackStatus} from '../../../interfaces';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { IUser, IFeedbackStatus } from '../../../interfaces';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
-import { UserService } from '../../../services/user.service';
+import { FormBuilder, FormGroup, NgForm, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
   imports: [
+    ReactiveFormsModule,
     CommonModule, 
-    FormsModule
   ],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.scss'
 })
 export class UserFormComponent {
-  @Input() title!: string;
-  @Input() user: IUser = {
-    email: '',
-    lastname: '',
-    password: '',
-    name: ''
-  };
-  @Input() action: string = 'add'
-  service = inject(UserService);
-  feedbackMessage: IFeedBackMessage = {type: IFeedbackStatus.default, message: ''};
+  public fb: FormBuilder = inject(FormBuilder);
+  @Input() userForm!: FormGroup;
+  @Output() callSaveMethod: EventEmitter<IUser> = new EventEmitter<IUser>();
+  @Output() callUpdateMethod: EventEmitter<IUser> = new EventEmitter<IUser>();
 
-  handleAction (form: NgForm) {
-    if (form.invalid) {
-      Object.keys(form.controls).forEach(controlName => {
-        form.controls[controlName].markAsTouched();
-      });
-      return;
+  callSave() {
+    let order: IUser = {
+      email: this.userForm.controls['email'].value,
+      name: this.userForm.controls['name'].value,
+      lastname: this.userForm.controls['lastname'].value,
+      password: this.userForm.controls['password'].value,
+      updatedAt: this.userForm.controls['updatedAt'].value,
+    }
+    if(this.userForm.controls['id'].value) {
+      order.id = this.userForm.controls['id'].value;
+    } 
+    if(order.id) {
+      this.callUpdateMethod.emit(order);
     } else {
-      this.service[ this.action == 'add' ? 'saveUserSignal': 'updateUserSignal'](this.user).subscribe({
-        next: () => {
-          this.feedbackMessage.type = IFeedbackStatus.success;
-          this.feedbackMessage.message = `User successfully ${this.action == 'add' ? 'added': 'updated'}`
-        },
-        error: (error: any) => {
-          this.feedbackMessage.type = IFeedbackStatus.error;
-          this.feedbackMessage.message = error.message;
-        }
-      })
+      this.callSaveMethod.emit(order);
     }
   }
 }

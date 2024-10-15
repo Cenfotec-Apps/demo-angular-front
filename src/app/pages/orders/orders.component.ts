@@ -6,8 +6,9 @@ import { ModalComponent } from '../../components/modal/modal.component';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { ModalService } from '../../services/modal.service';
 import { OrdersFormComponent } from '../../components/orders/orders-form/orders-form.component';
-import { IOrder } from '../../interfaces';
+import { IOrder, IRoleType } from '../../interfaces';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-orders',
@@ -25,6 +26,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class OrdersComponent {
   public ordersService: OrdersService = inject(OrdersService);
   public modalService: ModalService = inject(ModalService);
+  public authService: AuthService = inject(AuthService);
   @ViewChild('addOrdersModal') public addOrdersModal: any;
   public fb: FormBuilder = inject(FormBuilder);
   orderForm = this.fb.group({
@@ -34,7 +36,8 @@ export class OrdersComponent {
   })
 
   constructor() {
-    this.ordersService.getAllByUser();
+    this.ordersService.search.page = 1;
+    this.authService.isSuperAdmin() ?  this.ordersService.getAll() : this.ordersService.getAllByUser();
   }
 
   saveOrder(order: IOrder) {

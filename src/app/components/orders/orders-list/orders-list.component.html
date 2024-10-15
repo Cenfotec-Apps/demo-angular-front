@@ -21,6 +21,14 @@
           <button (click)="callDeleteAction.emit(item)" class="btn btn-danger" type="button"><i class="fas fa-trash"></i></button>
         </td>
       </tr>
+    } @empty {
+      <tr>
+        <td colspan="4">
+          <div class="d-flex justify-content-center align-items-center w-100">
+            <p class="mb-0">There are not orders</p>
+          </div>
+        </td>
+      </tr>
     }
   </tbody>
 </table>

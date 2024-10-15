@@ -22,7 +22,7 @@ export class OrdersService extends BaseService<IOrder> {
   private alertService: AlertService = inject(AlertService);
 
   getAll() {
-    this.findAllWithParams(this.search).subscribe({
+    this.findAllWithParams({ page: this.search.page, size: this.search.size}).subscribe({
       next: (response: any) => {
         this.search = {...this.search, ...response.meta};
         this.totalItems = Array.from({length: this.search.totalPages ? this.search.totalPages: 0}, (_, i) => i+1);
@@ -35,7 +35,7 @@ export class OrdersService extends BaseService<IOrder> {
   }
 
   getAllByUser() {
-    this.findAllWithParamsAndCustomSource(`user/${this.authService.getUser()?.id}/orders`, this.search).subscribe({
+    this.findAllWithParamsAndCustomSource(`user/${this.authService.getUser()?.id}/orders`, { page: this.search.page, size: this.search.size}).subscribe({
       next: (response: any) => {
         this.search = {...this.search, ...response.meta};
         this.totalItems = Array.from({length: this.search.totalPages ? this.search.totalPages: 0}, (_, i) => i+1);

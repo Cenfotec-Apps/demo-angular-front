@@ -1,22 +1,38 @@
-<div class="container-fluid">
-  <div>
-    <h2>Users</h2>
-  </div>
-  <div>
-    @defer {
-    <div class="d-flex justify-content-end pb-2">
-      <button type="button" class="btn btn-primary d-flex align-items-center">
-        <i class="fa-solid fa-plus white"></i>
-        <p class="mb-0">Add user</p>
-      </button>
+@defer {
+  <div class="row p-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>Orders</h2>
+        <button (click)="modalService.displayModal('md', addUsersModal)" type="button" class="btn btn-primary"><i class="fas fa-plus"></i></button>
+      </div>
     </div>
-    <app-user-list></app-user-list>
-    } @loading (after 100ms; minimum 1s){
-    <app-loader></app-loader>
-    }
+    <div class="col-12">
+      <app-user-list
+        (callModalAction)="callEdition($event)"
+        (callDeleteAction)="userService.delete($event)"
+        [users]="userService.users$()"
+      />
+      @if(userService.users$().length) {
+        <app-pagination
+          [service]="userService"
+        />
+      }
+    </div>
   </div>
-</div>
+} @loading (minimum 1.5s){
+  <app-loader></app-loader>
+}
 
-<app-modal size="lg" #formModal>
-  <app-user-form [title]="'Add User'"></app-user-form>
-</app-modal>
+<ng-template #addUsersModal>
+  <app-modal
+    [hideFooter]="true"
+  >
+    <div>
+      <app-user-form
+        [userForm]="userForm"
+        (callSaveMethod)="saveUser($event)"
+        (callUpdateMethod)="updateUser($event)"
+      />
+    </div>
+  </app-modal>
+</ng-template>
