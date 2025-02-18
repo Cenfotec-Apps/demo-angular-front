@@ -33,8 +33,7 @@ export class GamesComponent implements OnInit{
     this.authService.getUserAuthorities();
     this.gameService.getAll();
     this.route.data.subscribe( data => {
-      this.routeAuthorities = data['authorities'] ? data['authorities'] : [];
-      this.areActionsAvailable = this.authService.areActionsAvailable(this.routeAuthorities);
+      this.areActionsAvailable = this.authService.areActionsAvailable(data['authorities'] ? data['authorities'] : []);
     });
   }
 
