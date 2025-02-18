@@ -12,6 +12,7 @@ import { IRoleType } from './interfaces';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { GamesComponent } from './pages/games/games.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { PreferenceListComponent } from './pages/preferenceList/preference-list.component';
 
 export const routes: Routes = [
   {
@@ -105,6 +106,19 @@ export const routes: Routes = [
             IRoleType.user,
           ],
           name: 'orders',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'preference-list',
+        component: PreferenceListComponent,
+        data: { 
+          authorities: [
+            IRoleType.admin, 
+            IRoleType.superAdmin,
+            IRoleType.user,
+          ],
+          name: 'preference list',
           showInSidebar: true
         }
       }

@@ -1,3 +1,7 @@
-<div class="preference-list-container">
-  <h3>Preference List</h3>
-</div>
+@defer {
+  <div class="preference-list-container">
+    <h3>Preference List</h3>
+  </div>
+} @loading (minimum 1.5s){
+  <app-loader></app-loader>
+}
