@@ -12,7 +12,7 @@ import { IRoleType } from './interfaces';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { GamesComponent } from './pages/games/games.component';
 import { OrdersComponent } from './pages/orders/orders.component';
-import { PreferenceListComponent } from './pages/preferenceList/preference-list.component';
+import { PreferenceListPageComponent } from './pages/preferenceList/preference-list.component';
 
 export const routes: Routes = [
   {
@@ -111,7 +111,7 @@ export const routes: Routes = [
       },
       {
         path: 'preference-list',
-        component: PreferenceListComponent,
+        component: PreferenceListPageComponent,
         data: { 
           authorities: [
             IRoleType.admin, 

@@ -5,6 +5,8 @@ export interface ILoginResponse {
 
 export interface IResponse<T> {
   data: T;
+  message: string,
+  meta: T;
 }
 
 export interface IUser {
@@ -72,4 +74,17 @@ export interface ISearch {
   pageSize?: number;
   totalElements?: number;
   totalPages?:number;
+}
+
+export interface IMovie {
+  id?: number;
+  title?: string;
+  director?: string;
+  description?: string;
+}
+
+export interface IPreferenceList {
+  id?: number;
+  name?: string;
+  movies?: IMovie[];
 }
