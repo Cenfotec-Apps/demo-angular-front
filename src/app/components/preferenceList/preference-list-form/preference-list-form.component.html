@@ -1,0 +1,15 @@
+<form [formGroup]="form" class="row">
+  <div>
+    <h2 class="mb-0">Add PreferenceList</h2>
+  </div>
+  <div class="mb-2">
+    <label class="mb-1" for="name">Name*</label>
+    <input id="name" formControlName="name" type="text" class="form-control">
+    @if (form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)) {
+      <p class="text-danger my-1">Name is required</p>
+    }
+  </div>
+  <div class="d-flex justify-content-end">
+    <button (click)="callSave()" [disabled]="form.invalid" class="btn btn-primary" type="button">Save</button>
+  </div>
+</form>

@@ -1,19 +1,39 @@
 @defer {
-  <div class="preference-list-container">
+  <div class="row p-4">
     <div class="col-12">
       <div class="d-flex justify-content-between align-items-center">
-        <h2>Preference list</h2>
+        <h2>{{title}}</h2>
+        <button (click)="modalService.displayModal('md', addPreferenceListModal)" type="button" class="btn btn-primary"><i class="fas fa-plus"></i></button>
       </div>
     </div>
-  </div>
-    <app-preference-list
-      [preferenceList]="preferenceListService.prefencelist$()"
-    />
+    <div class="col-12">
+      <app-preference-list
+        [preferenceList]="preferenceListService.prefencelist$()"
+        (callModalAction)="callEdition($event)"
+        (callDeleteAction)="deletePreferenceList($event)"
+      />
+    </div>
     @if(preferenceListService.prefencelist$().length) {
       <app-pagination
         [service]="preferenceListService"
       />
     }
+  </div>
 } @loading (minimum 1.5s){
   <app-loader></app-loader>
 }
+
+<ng-template #addPreferenceListModal>
+  <app-modal
+    [hideFooter]="true"
+  >
+    <div>
+      <app-preference-list-form
+        [form]="preferenceListForm"
+        (callSaveMethod)="savePreferenceList($event)"
+        (callUpdateMethod)="updatePreferenceList($event)"
+      >
+      </app-preference-list-form>
+    </div>
+  </app-modal>
+</ng-template>
