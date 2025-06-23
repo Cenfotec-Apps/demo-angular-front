@@ -1,0 +1,24 @@
+<div class="team-container">
+  @for (team of pTeamList; track team) {
+    <div class="team-item">
+      <img class="team-logo" src="{{team.teamLogo}}" alt="team {{team.name}} logo">
+      <h2>Team: {{team.name}}</h2>
+      <h3>Stadium: {{team.stadium}}</h3>
+      <p>Coach: {{team.coach}}</p>
+      <p>Players: </p>
+      <div class="player-content">
+        @for (player of team.players; track player) {
+          <p class="player-item">{{player}}</p>
+        }
+      </div>
+      <p>Founded: {{team.founded}}</p>
+      @if (team.isInClubsWorldCup) {
+        <p>Is in Clubs World Cup</p>
+      } @else {
+        <p>Is not in Clubs World Cup</p>
+      }
+    </div>
+  } @empty {
+    <p>No teams available.</p>
+  }
+</div>

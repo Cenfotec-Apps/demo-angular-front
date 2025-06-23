@@ -1,0 +1,27 @@
+.team-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  .team-item {
+    border-radius: 20px;
+    box-shadow: 3px 2px 17px 0px rgba(0,0,0,0.15);
+    -webkit-box-shadow: 3px 2px 17px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: 3px 2px 17px 0px rgba(0,0,0,0.15);
+    padding: 20px;
+    .team-logo {
+      width: 140px;
+      height: 140px;
+    }
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .player-content {
+      background-color: rgb(238, 238, 238);
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  }
+}
