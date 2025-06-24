@@ -1,6 +1,31 @@
 <p>Teams</p>
 
-<app-sport-team-form/>
+@if (areActionsAvailable) {
+  <app-sport-team-form
+    [form]="teamForm"
+    (callSaveMethod)="saveTeam($event)"
+  />
+
+}
 <app-sport-team-list
-  [pTeamList]="teamList"
+  [pTeamList]="teamService.teams$()"
+  (callUpdateModalMethod)="openEditTeamModal($event)"
+  (callDeleteMethod)="deleteTeam($event)"
 />
+<app-pagination
+  [service]="teamService"
+/>
+
+
+<ng-template #editTeamModal>
+  <app-modal
+    [hideFooter]="true"
+  >
+    <div>
+      <app-sport-team-form
+        [form]="teamForm"
+        (callUpdateMethod)="updateTeam($event)"
+      />
+    </div>
+  </app-modal>
+</ng-template>

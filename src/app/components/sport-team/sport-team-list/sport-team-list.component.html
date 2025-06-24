@@ -8,7 +8,7 @@
       <p>Players: </p>
       <div class="player-content">
         @for (player of team.players; track player) {
-          <p class="player-item">{{player}}</p>
+          <p class="player-item">{{player.name}}</p>
         }
       </div>
       <p>Founded: {{team.founded}}</p>
@@ -16,6 +16,10 @@
         <p>Is in Clubs World Cup</p>
       } @else {
         <p>Is not in Clubs World Cup</p>
+      }
+      @if (areActionsAvailable) {
+        <button (click)="callUpdateModalMethod.emit(team)" class="btn btn-success">Edit</button>
+        <button  (click)="callDeleteMethod.emit(team)" class="btn btn-danger">Delete</button>
       }
     </div>
   } @empty {

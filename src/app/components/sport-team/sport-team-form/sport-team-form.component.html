@@ -1,35 +1,47 @@
-<div class="team-form-container">
-  <form >
-    <div class="form-group">
-      <label for="teamName">Team Name:</label>
-      <input id="teamName"  type="text" required>
+<form [formGroup]="form" class="row mb-4">
+  <div>
+    <h2 class="mb-0">Add Team</h2>
+  </div>
+  <div class="mb-2 col-4">
+    <label class="mb-1" for="name">Name*</label>
+    <input id="name" formControlName="name" type="text" class="form-control">
+    @if (form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)) {
+      <p class="text-danger my-1">Name is required</p>
+    }
+  </div>
+  <div class="mb-2 col-4">
+    <label class="mb-1" for="coach">Coach*</label>
+    <input id="coach" formControlName="coach" type="text" class="form-control">
+    @if (form.controls['coach'].invalid && (form.controls['coach'].dirty || form.controls['coach'].touched)) {
+      <p class="text-danger my-1">coach is required</p>
+    }
+  </div>
+  <div class="mb-2 col-4">
+    <label class="mb-1" for="stadium">Stadium*</label>
+    <input id="stadium" formControlName="stadium" type="text" class="form-control">
+    @if (form.controls['stadium'].invalid && (form.controls['stadium'].dirty || form.controls['stadium'].touched)) {
+      <p class="text-danger my-1">stadium is required</p>
+    }
     </div>
-
-    <div class="form-group">
-      <label for="stadium">Stadium:</label>
-      <input id="stadium" type="text" required>
+    <div class="mb-2 col-4">
+      <label class="mb-1" for="teamLogo">Team Logo*</label>
+      <input id="teamLogo" formControlName="teamLogo" type="text" class="form-control">
+      @if (form.controls['teamLogo'].invalid && (form.controls['teamLogo'].dirty || form.controls['teamLogo'].touched)) {
+        <p class="text-danger my-1">Team Logo is required</p>
+      }
     </div>
-
-    <div class="form-group">
-      <label for="coach">Coach:</label>
-      <input id="coach" type="text" required>
+    <div class="mb-2 col-4">
+      <label class="mb-1" for="founded">Founded*</label>
+      <input id="founded" formControlName="founded" type="number" class="form-control">
+      @if (form.controls['founded'].invalid && (form.controls['founded'].dirty || form.controls['founded'].touched)) {
+        <p class="text-danger my-1">Founded is required</p>
+      }
     </div>
-
-    <div  class="form-group">
-      <label for="players">Players (comma separated):</label>
-      <input id="players" type="text">
-    </div>
-
-    <div class="form-group">
-      <label for="founded">Founded Year:</label>
-      <input id="founded" type="number">
-    </div>
-
-    <div  class="form-group">
-      <label for="isInClubsWorldCup">Is in Clubs World Cup:</label>
-      <input id="isInClubsWorldCup" type="checkbox">
-    </div>
-
-    <button type="submit">Add Team</button>
-  </form>
-</div>
+  <div class="mb-2 col-4 d-flex align-items-center">
+    <input id="isInClubsWorldCup" formControlName="isInClubsWorldCup" type="checkbox" class="form-check-input me-2">
+    <label class="mb-1" for="isInClubsWorldCup">Is in Clubs World Cup</label>
+  </div>
+  <div class="col-12">
+    <button (click)="callSave()" [disabled]="form.invalid" class="btn btn-primary" type="button">Save</button>
+  </div>
+</form>
