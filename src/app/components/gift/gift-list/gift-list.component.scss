@@ -1,0 +1,19 @@
+.gift-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+  .gift-list-item {
+    border-radius: 20px;
+    background: #f7f8f9;
+    box-shadow:  20px 20px 60px #d2d3d4,
+                -20px -20px 60px #ffffff;
+    min-height: 100px;
+    padding: 30px;
+    .title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+}

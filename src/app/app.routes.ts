@@ -12,8 +12,11 @@ import { IRoleType } from './interfaces';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { GamesComponent } from './pages/games/games.component';
 import { OrdersComponent } from './pages/orders/orders.component';
-import { PreferenceListPageComponent } from './pages/preferenceList/preference-list.component';
+import { PreferenceListPageComponent } from './pages/preference-list/preference-list.component';
 import { SportTeamComponent } from './pages/sport-team/sport-team.component';
+import { CalculatorComponent } from './pages/calculator/calculator.component';
+import { GiftComponent } from './pages/gift/gift.component';
+
 
 export const routes: Routes = [
   {
@@ -136,6 +139,32 @@ export const routes: Routes = [
           showInSidebar: true
         }
       },
+      {
+        path: 'calculator',
+        component: CalculatorComponent,
+        data: {
+          authorities: [
+            IRoleType.admin,
+            IRoleType.superAdmin,
+            IRoleType.user,
+          ],
+          name: 'Calculator',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'gift',
+        component: GiftComponent,
+        data: {
+          authorities: [
+            IRoleType.admin,
+            IRoleType.superAdmin,
+            IRoleType.user,
+          ],
+          name: 'Gifts',
+          showInSidebar: true
+        }
+      }
     ],
   },
 ];

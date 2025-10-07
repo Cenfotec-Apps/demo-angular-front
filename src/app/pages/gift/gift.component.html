@@ -1,0 +1,22 @@
+@defer {
+  <div class="row p-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>Gifts</h2>
+      </div>
+    </div>
+    <div class="col-12">
+      <app-gift-list
+        [gifts]="giftListService.gifts$()"
+      /> 
+    </div>
+    @if(giftListService.gifts$().length) {
+      <app-pagination
+        [service]="giftListService"
+        [customCall]="false"
+      />
+    }
+  </div>
+} @loading (minimum 1.5s) {
+  <app-loader/>
+}

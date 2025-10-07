@@ -2,7 +2,7 @@ import { PreferenceListFormComponent } from './../../components/preferenceList/p
 import { CommonModule } from "@angular/common";
 import { Component, inject, ViewChild } from "@angular/core";
 import { LoaderComponent } from "../../components/loader/loader.component";
-import { PreferenceListService } from "../../services/preferenceList.service";
+import { PreferenceListService } from "../../services/preference-list.service";
 import { PaginationComponent } from "../../components/pagination/pagination.component";
 import { PreferenceListComponent } from "../../components/preferenceList/preference-list/preference-list.component";
 import { ModalComponent } from "../../components/modal/modal.component";

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div>
+    <p id="title"></p>
+    <button class="btn" onclick="changeTitle()">Change Title</button>
+
+    <div class="calc">
+      <button class="btn-calc" onclick="addOne()">+</button>
+      <button class="btn-calc" onclick="subtractOne()">-</button>
+    </div>
+
+    <input type="number" id="number-input" onchange="changeValue()" value="0" />
+
+    <p id="result"></p>
+
+    <div id="fruit-list">
+    </div>
+  </div>
+  <script src="./logic.js"></script>
+</body>
+</html>

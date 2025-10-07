@@ -1,0 +1,14 @@
+<p>{{title}}</p>
+
+<p>The result is: {{result}}</p>
+
+<div class="calc">
+  <button class="btn-calc" (click)="addOne()">+</button>
+  <button class="btn-calc" (click)="subtractOne()">-</button>
+</div>
+
+<div class="fruit-list">
+  @for (fruit of fruits; track $index) {
+    <p>{{fruit}}</p>
+  }
+</div>

@@ -1,0 +1,31 @@
+body {
+  background: black;
+  color: white;
+}
+
+p {
+  color: white;
+  font-size: 24px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.calc {
+  display: flex;
+  margin-top: 20px;
+  gap: 20px;
+} 
+
+.btn-calc {
+  background: blue;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
