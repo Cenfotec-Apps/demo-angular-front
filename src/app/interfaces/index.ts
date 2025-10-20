@@ -105,7 +105,7 @@ export interface IPlayer {
   name?: string;
 }
 
-export interface IGift {
+export interface IGiftList {
   id?: number;
   name?: string;
   description?: string;

@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { IGift } from '../../../interfaces';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IGiftList } from '../../../interfaces';
 
 @Component({
   selector: 'app-gift-list',
@@ -9,5 +9,7 @@ import { IGift } from '../../../interfaces';
   styleUrl: './gift-list.component.scss'
 })
 export class GiftListComponent {
-  @Input() gifts: IGift[] = [];
+  @Input() giftsList: IGiftList[] = [];
+  @Output() callEditMethod: EventEmitter<IGiftList> = new EventEmitter<IGiftList>();
+  @Output() callDeleteMethod: EventEmitter<IGiftList> = new EventEmitter<IGiftList>();
 }

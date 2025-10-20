@@ -42,6 +42,10 @@ export class BaseService<T> {
     return this.http.put<IResponse<T>>(this.source + '/' + id, data);
   }
 
+  public customEdit(data: {}): Observable<IResponse<T>> {
+    return this.http.put<IResponse<T>>(this.source, data);
+  }
+
   public editCustomSource(customUrlSource: string, data: {}): Observable<IResponse<T>> {
     return this.http.put<IResponse<T>>(`${this.source}${customUrlSource ? '/' + customUrlSource: ''}`, data);
   }
