@@ -1,0 +1,65 @@
+<form [formGroup]="form">
+  <div>
+    <h2 class="mb-0">{{ isEdit ? 'Edit Gift' : 'Add Gift to Gift List' }}</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-2">
+        <label class="mb-1" for="name">Name*</label>
+        <input id="name" formControlName="name" type="text" class="form-control">
+        @if (form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)) {
+          <p class="text-danger my-1 p-absolute">Name is required</p>
+        }
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="mb-2">
+        <label class="mb-1" for="price">Price</label>
+        <input id="price" formControlName="price" type="number" step="0.01" class="form-control">
+      </div>
+    </div>
+  </div>
+  @if (showGiftListSelector) {
+    <div class="row">
+      <div class="col-md-12">
+        <div class="mb-2">
+          <label class="mb-1" for="giftListId">Gift List*</label>
+          <select id="giftListId" formControlName="giftListId" class="form-control">
+            <option value="">Select a Gift List</option>
+            @for (giftList of giftLists; track giftList.id) {
+              <option [value]="giftList.id">{{ giftList.name }}</option>
+            }
+          </select>
+          @if (form.controls['giftListId'].invalid && (form.controls['giftListId'].dirty || form.controls['giftListId'].touched)) {
+            <p class="text-danger my-1 p-absolute">Gift List is required</p>
+          }
+        </div>
+      </div>
+    </div>
+  }
+  <div class="row">
+    <div class="col-md-12">
+      <div class="mb-2">
+        <label class="mb-1" for="description">Description</label>
+        <textarea id="description" formControlName="description" class="form-control" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="mb-2">
+        <label class="mb-1" for="imageUrl">Image URL</label>
+        <input id="imageUrl" formControlName="imageUrl" type="text" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-end mt-3">
+      <div class="">
+        <button (click)="callSaveMethod.emit(form.value)" [disabled]="form.invalid" class="btn btn-primary" type="button">
+          {{ isEdit ? 'Update' : 'Add Gift' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

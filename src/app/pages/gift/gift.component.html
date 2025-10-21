@@ -15,12 +15,12 @@
     </div>
     <div class="col-12">
       <app-gift-list
-        [giftsList]="giftListService.gifts$()"
+        [giftsList]="giftListService.giftsLists$()"
         (callEditMethod)="form.patchValue($event)"
         (callDeleteMethod)="delete($event)"
       /> 
     </div>
-    @if(giftListService.gifts$().length) {
+    @if(giftListService.giftsLists$().length) {
       <app-pagination
         [service]="giftListService"
         [customCall]="false"

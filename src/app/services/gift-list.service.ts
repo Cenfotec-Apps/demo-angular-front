@@ -10,7 +10,7 @@ import { AlertService } from './alert.service';
 export class GiftListService extends BaseService<IGiftList> {
   protected override source: string = 'gift-lists';
   private giftListSignal = signal<IGiftList[]>([]);
-  get gifts$() {
+  get giftsLists$() {
     return this.giftListSignal;
   }
     public search: ISearch = { 

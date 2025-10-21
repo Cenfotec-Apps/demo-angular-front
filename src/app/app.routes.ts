@@ -16,6 +16,8 @@ import { PreferenceListPageComponent } from './pages/preference-list/preference-
 import { SportTeamComponent } from './pages/sport-team/sport-team.component';
 import { CalculatorComponent } from './pages/calculator/calculator.component';
 import { GiftComponent } from './pages/gift/gift.component';
+import { GiftListGiftsComponent } from './pages/gift-list-gifts/gift-list-gifts.component';
+import { GiftsComponent } from './pages/gifts/gifts.component';
 
 
 export const routes: Routes = [
@@ -140,8 +142,21 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'gift',
+        path: 'gift-list',
         component: GiftComponent,
+        data: {
+          authorities: [
+            IRoleType.admin,
+            IRoleType.superAdmin,
+            IRoleType.user,
+          ],
+          name: 'Gift Lists',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'gifts',
+        component: GiftsComponent,
         data: {
           authorities: [
             IRoleType.admin,

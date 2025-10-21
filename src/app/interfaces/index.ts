@@ -110,3 +110,14 @@ export interface IGiftList {
   name?: string;
   description?: string;
 }
+
+export interface IGift {
+  id?: number;
+  name?: string;
+  description?: string;
+  price?: number;
+  imageUrl?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  giftList?: IGiftList;
+}

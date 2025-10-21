@@ -30,9 +30,9 @@ export class GiftComponent {
   constructor() {
     this.giftListService.getAll();
     effect(() => {
-      console.log('gift lists updated', this.giftListService.gifts$());
-      if (this.giftListService.gifts$()[0]) {
-        this.giftListService.gifts$()[0] ?  this.giftListService.gifts$()[0].name = `${this.giftListService.gifts$()[0].name} - Caros` : null;
+      console.log('gift lists updated', this.giftListService.giftsLists$());
+      if (this.giftListService.giftsLists$()[0]) {
+        this.giftListService.giftsLists$()[0] ?  this.giftListService.giftsLists$()[0].name = `${this.giftListService.giftsLists$()[0].name} - Caros` : null;
       }
     });
   }

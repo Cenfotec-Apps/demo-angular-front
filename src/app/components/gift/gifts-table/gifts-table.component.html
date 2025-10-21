@@ -1,0 +1,48 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Gift List</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (gifts.length === 0) {
+        <tr>
+          <td colspan="7" class="text-center">No gifts found</td>
+        </tr>
+      }
+      @for (gift of gifts; track gift.id) {
+        <tr>
+          <td>{{ gift.id }}</td>
+          <td>{{ gift.name }}</td>
+          <td>{{ gift.description }}</td>
+          <td>{{ gift.price ? '$' + gift.price : 'N/A' }}</td>
+          <td>{{ gift.giftList?.name || 'N/A' }}</td>
+          <td>
+            @if (gift.imageUrl) {
+              <img [src]="gift.imageUrl" alt="{{ gift.name }}" style="width: 50px; height: 50px; object-fit: cover;">
+            } @else {
+              N/A
+            }
+          </td>
+          <td>
+            <button (click)="callEditMethod.emit(gift)" class="btn btn-sm btn-warning me-2" type="button">
+              Edit
+            </button>
+            @if (areActionsAvailable) {
+              <button (click)="callDeleteMethod.emit(gift)" class="btn btn-sm btn-danger" type="button">
+                Delete
+              </button>
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

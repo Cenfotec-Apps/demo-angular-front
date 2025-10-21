@@ -1,0 +1,47 @@
+<div class="container-fluid p-4">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h1>Manage Gifts for Gift List #{{ giftListId }}</h1>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <app-gift-form 
+            [form]="form" 
+            [isEdit]="isEdit"
+            [showGiftListSelector]="false"
+            (callSaveMethod)="save($event)">
+          </app-gift-form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title mb-3">Gifts List</h3>
+          <app-gifts-table 
+            [gifts]="giftService.gifts$()"
+            (callEditMethod)="edit($event)"
+            (callDeleteMethod)="delete($event)">
+          </app-gifts-table>
+          
+          @if (giftService.search.totalPages && giftService.search.totalPages > 1) {
+            <div class="mt-3">
+              <app-pagination 
+                [service]="giftService"
+                [customCall]="true"
+                (callCustomPaginationMethod)="loadGifts()">
+              </app-pagination>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
